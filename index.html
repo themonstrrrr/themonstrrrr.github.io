@@ -1,0 +1,769 @@
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <title>Estimator</title>
+   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+body {
+ font-family: 'Open sans', sans-serif;
+ margin:0;
+}
+
+div#step-tabs{
+ display: block !important;
+ justify-content: left !important;
+ align-items: flex-start !important;
+}
+
+p#error_msg {
+ color: red;
+}
+.step_form_price {
+ float: right;
+ display: block;
+ margin-top: -18px;
+ margin-bottom: 21px !important;
+}
+#updated_price_form {
+ font-weight: 600;
+ background:#000;
+ text-align: center;
+ color: #fff;
+ padding: 4px;
+ font-size: 18px;
+ margin-bottom: 4px;
+}
+.custom-container {
+ max-width: 1140px;
+ margin: 0 auto;
+ position:relative;
+}
+.dream_kitchen_step h1 {
+ font-size: 70px;
+ font-family: "Open sans", Sans-serif;
+ font-weight: 400;
+ letter-spacing: .45px;
+ color: #fff;
+ margin: 0 0 0;
+ text-align: center;
+}
+.dream_kitchen_step p {
+ color: #fff;
+ font-size: 20px;
+ text-align: center;
+}
+.dream_kitchen_step {
+ padding-left: 10px;
+ padding-right: 10px;
+}
+a.strt-now-btn {
+ background: #000;
+ text-decoration: none;
+ color: #fff;
+ padding: 14px 20px;
+ display: table;
+ margin: 40px auto 0;
+ min-width: 185px;
+ font-size: 20px;
+ text-align: center;
+ border-radius: 5px;
+}
+
+.step-form-sec{
+ padding: 220px 20px 120px;
+ background-size: cover;
+ position: relative;
+}
+
+#regForm {
+ background-color: #fff;
+ margin: 0 auto;
+ padding: 40px;
+ width: 100%;
+ min-width: 300px;
+ max-width: 750px;
+ box-sizing: border-box;
+ position: relative;
+ display: none;
+}
+
+.step-tab {
+display: none;
+}
+
+form{
+   display: block;
+   justify-content: left;
+   align-items: flex-end;
+}
+
+button#nextBtn {
+ border: none;
+ background:#000;
+ color: #fff;
+ font-size: 15px;
+ padding: 12px 30px;
+ text-transform: uppercase;
+ font-family: 'Open sans';
+ cursor: pointer;
+ margin-top: 20px;
+}
+#prevBtn {
+ border: none;
+ background-color: #000;
+ color: #fff;
+ font-size: 15px;
+ padding: 12px 25px;
+ text-transform: uppercase;
+ margin-top: 20px;
+ cursor: pointer;
+}
+.step {
+height: 15px;
+width: 15px;
+margin: 0 2px;
+background-color: #bbbbbb;
+border: none;  
+border-radius: 50%;
+display: inline-block;
+opacity: 0.5;
+}
+
+.step.active {
+opacity: 1;
+}
+.step.finish {
+background-color: #04AA6D;
+}
+
+.step-circles{display:none;}
+
+.step-tab h4 {
+ font-weight: 600;
+ font-size: 22px;
+ margin-bottom: 17px;
+ color: #363b3e;
+ font-family: 'Open sans', sans-serif;
+ letter-spacing:0;
+}
+.step-tab p {
+ margin: 8px 0px 2px;
+}
+.step-tab span {
+ color: #c02b0a;
+ display: inline-block;
+ font-size: 13.008px;
+}
+input[type="radio" i] {
+ cursor: pointer;
+}
+.step-tab.type_Radio input{visibility:hidden;}
+.step-tab label {
+ cursor: pointer;
+ position: relative;
+ font-size: 15px;
+ padding-left: 18px;
+ color: #444;
+}
+.final_step label {
+ font-weight: 600!important;
+ font-size: 18px;
+ margin-bottom: 5px;
+ color: #363b3e;
+ display: block;
+ padding-left: 0;
+}
+.final_step input {
+ background: #f7f7f7;
+ border: 1px solid #c4c4c4;
+ border-radius: 0;
+ box-shadow: none;
+ color: #787878;
+ transition: all .5s;
+ outline: none;
+ padding: 11px 12px;
+ width: 100%;
+ box-sizing: border-box;
+}
+/*progress-bar*/
+.progress {
+ margin-top: 44px;
+ background: #d2d6dc;
+ border-radius: 100px;
+ overflow: hidden;
+ width: 100%;
+ margin-bottom: 20px;
+ height: 20px;
+}
+.progress-bar.progress-bar-striped.active {
+ background-color: #000;
+ color: #fff;
+ font-size: 13px;
+ padding-right: 15px;
+ height: 21px;
+ text-align: right;
+ position: relative;
+ left: -4px;
+ font-weight: bold;
+ line-height: 19px;
+}
+.step_count {
+ position: absolute;
+ top: 63px;
+ left: 50%;
+ transform: translate(-50%);
+ font-size: 12.992px;
+ font-weight: 400;
+ color: #767676;
+}
+#regForm .step-tab.type_Radio label:before {
+ position: absolute;
+ top: -2px;
+ left: -14px;
+ width: 22px;
+ height: 22px;
+ content: '';
+ border: 1px solid #000;
+ border-radius: 20px;
+}
+#regForm .step-tab.type_Radio input + label:after {
+ position: absolute;
+ top: 2px;
+ left: -10px;
+ width: 14px;
+ height: 14px;
+ background: #000;
+ content: '';
+ border-radius: 20px;
+ transition: all ease 0.4s;
+ transform: scale(0);
+}
+#regForm .step-tab.type_Radio input:checked + label:after {
+ transform: scale(1);
+}
+#regForm .step-tab.type_Checkbox label:before {
+ position: absolute;
+ top: 0;
+ left: -14px;
+ width: 22px;
+ height: 22px;
+ border: 1px solid #000;
+ content: '';
+}
+#regForm .step-tab.type_Checkbox input:checked + label:after {
+ opacity: 1;
+ transition: all ease 0.4s;
+}
+#regForm .step-tab.type_Checkbox input{visibility:hidden;}
+#regForm .step-tab.type_Checkbox label:after {
+ position: absolute;
+ top: -4px;
+ left: -10px;
+ width: 23px;
+ height: 22px;
+ content: '';
+ background: url(https://ik.imagekit.io/themonstrrr/tickmark.png?updatedAt=1692157984062) no-repeat;
+ opacity: 0;
+ transition: all ease 0.4s;
+}
+@media only screen and (max-width:765px){
+ .progress-bar.progress-bar-striped.active {
+ padding-left: 7px;
+}
+}
+
+@media only screen and (max-width: 580px) {
+#regForm {
+ padding: 40px 20px;
+}
+.step-tab label {
+ cursor: pointer;
+ font-size: 14px;
+}
+.step-tab h4 {
+ font-size: 18px;
+}
+.progress-bar.progress-bar-striped.active {
+ position: relative;
+ left: 0px;
+}
+.dream_kitchen_step h1 {
+ font-size: 36px;
+}
+.dream_kitchen_step p {
+ font-size: 18px;
+}
+}
+@media only screen and (max-width:480px){
+ .progress-bar.progress-bar-striped.active {
+ padding-left: 4px;
+}
+input[type="checkbox"],input[type="radio"]{
+ position: relative;
+ top: 1px;
+}
+}
+@media only screen and (max-width: 355px) {
+.resultheading_new {
+ margin-bottom: 10px;
+}
+.step_count {
+ top: 82px;
+}
+}
+
+button{
+ border-radius: 5px;
+}
+
+   </style>
+</head>
+<body>
+   <link href="'https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <div class="elementor-shortcode">
+   <div class="step-form-sec">
+      <div class="custom-container">
+         <div class="dream_kitchen_step">
+            <a href="javascript:void(0)" class="strt-now-btn">Start Now</a>
+         </div>
+         <form id="regForm" action="#" />
+            <div class="step_form_price">
+               <div id="updated_price_form">$0</div>
+               <div class="resultheading_new"> Instant Quote</div>
+            </div>
+            <div class="progress">
+               <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                  <span></span>
+               </div>
+            </div>
+            <div id="step-tabs">
+             <div class="step-tab type_Radio">
+                 <h4>Do you own your own home? <span>*</span></h4>
+                 <p><input type="radio" id="input_295" name="Do_you_own_your_own_home?" value="Yes" data-value="0"> <label for="input_295">Yes</label></p>
+                 <p><input type="radio" id="input_296" name="Do_you_own_your_own_home?" value="No" data-value="1"> <label for="input_296">No</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>How Many Square Feet Do You Want To Add? <span>*</span></h4>
+                 <p><input type="radio" id="input_303" name="How_Many_Square_Feet_Do_You_Want_To_Add?" value="50SF (usually a mudroom)" data-value="50"> <label for="input_303">50SF (usually a mudroom)</label></p>
+                 <p><input type="radio" id="input_304" name="How_Many_Square_Feet_Do_You_Want_To_Add?" value="250SF (usually one room/single car garage)" data-value="250"> <label for="input_304">250SF (usually one room/single car garage)</label></p>
+                 <p><input type="radio" id="input_305" name="How_Many_Square_Feet_Do_You_Want_To_Add?" value="500SF (Usually 2 rooms/2 car garage)" data-value="500"> <label for="input_305">500SF (Usually 2 rooms/2 car garage)</label></p>
+                 <p><input type="radio" id="input_306" name="How_Many_Square_Feet_Do_You_Want_To_Add?" value="1000SF (usually whole second story or master suite)" data-value="1000"> <label for="input_306">1000SF (usually whole second story or master suite)</label></p>
+                 <p><input type="radio" id="input_447" name="How_Many_Square_Feet_Do_You_Want_To_Add?" value="1000 SF ADU (Accessory Dwelling Unit)" data-value="1000"> <label for="input_447">1000 SF ADU (Accessory Dwelling Unit)</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Do you need an Architectural Plan? <span>*</span></h4>
+                 <p><input type="radio" id="input_309" name="Do_you_need_an_Architectural_Plan?" value="Yes - Required For Additions and Structural Changes" data-value="10000,12000,20000,25000,25600,25600"> <label for="input_309">Yes - Required For Additions and Structural Changes</label></p>
+                 <p><input type="radio" id="input_310" name="Do_you_need_an_Architectural_Plan?" value="No - I am working with an architect/designer already" data-value="0"> <label for="input_310">No - I am working with an architect/designer already</label></p>
+                 <p><input type="radio" id="input_435" name="Do_you_need_an_Architectural_Plan?" value="No - I do not require an addition/structure change" data-value="0"> <label for="input_435">No - I do not require an addition/structure change</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>What Will Be In Your Addition, ADU or Remodel?  <span>*</span></h4>
+                 <p><input type="checkbox" id="input_311" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Kitchen" data-value="78000,88000,98000,98000,98000,98000"> <label for="input_311"> Kitchen</label></p>
+                 <p><input type="checkbox" id="input_312" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Garage Addition" data-value="65000,65000,65000,65000,65000,65000"> <label for="input_312"> Garage Addition</label></p>
+                 <p><input type="checkbox" id="input_313" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Second Story" data-value="91000,91000,91000,91000,91000,91000"> <label for="input_313"> Second Story</label></p>
+                 <p><input type="checkbox" id="input_314" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Bathroom" data-value="30000,35000,52000,52000,52000,52000"> <label for="input_314"> Bathroom</label></p>
+                 <p><input type="checkbox" id="input_315" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Sunroom" data-value="65000,65000,65000,65000,65000,65000"> <label for="input_315"> Sunroom</label></p>
+                 <p><input type="checkbox" id="input_316" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Rear Bump Out" data-value="26000,26000,26000,26000,26000,26000"> <label for="input_316"> Rear Bump Out</label></p>
+                 <p><input type="checkbox" id="input_317" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Mudroom" data-value="26000,26000,26000,26000,26000,26000"> <label for="input_317"> Mudroom</label></p>
+                 <p><input type="checkbox" id="input_318" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Ensuite Bathroom" data-value="52000,60000,65000,75000,75000,75000"> <label for="input_318"> Ensuite Bathroom</label></p>
+                 <p><input type="checkbox" id="input_319" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Office" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_319"> Office</label></p>
+                 <p><input type="checkbox" id="input_320" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Bedroom" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_320"> Bedroom</label></p>
+                 <p><input type="checkbox" id="input_321" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Laundry" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_321"> Laundry</label></p>
+                 <p><input type="checkbox" id="input_322" name="What_Will_Be_In_Your_Addition,_ADU_or_Remodel?_[]" value="Guesthouse" data-value="91000,91000,91000,91000,91000,91000"> <label for="input_322"> Guesthouse</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Demolition and Waste Removal? <span>*</span></h4>
+                 <p><input type="radio" id="input_324" name="Demolition_and_Waste_Removal?" value="Demolition Needed" data-value="19500,19500,19500,19500,19500,19500"> <label for="input_324">Demolition Needed</label></p>
+                 <p><input type="radio" id="input_325" name="Demolition_and_Waste_Removal?" value="Demolition Not Needed" data-value="1300,1300,1300,1300,1300,1300"> <label for="input_325">Demolition Not Needed</label></p>
+                 <p><input type="radio" id="input_326" name="Demolition_and_Waste_Removal?" value="Waste Removal" data-value="6500,6500,6500,6500,6500,6500"> <label for="input_326">Waste Removal</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>Concrete or Piers <span>*</span></h4>
+                 <p><input type="checkbox" id="input_327" name="Concrete_or_Piers[]" value="Full Foundation Needed" data-value="30000,45000,55000,75000,75000,75000"> <label for="input_327"> Full Foundation Needed</label></p>
+                 <p><input type="checkbox" id="input_437" name="Concrete_or_Piers[]" value="Only Slab Needed" data-value="10000,25000,40000,55000,55000,55000"> <label for="input_437"> Only Slab Needed</label></p>
+                 <p><input type="checkbox" id="input_440" name="Concrete_or_Piers[]" value="Use Existing Foundation (typically only 2nd story additions)" data-value="6500,10000,10000,10000,10000,10000"> <label for="input_440"> Use Existing Foundation (typically only 2nd story additions)</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Select Flooring <span>*</span></h4>
+                 <p><input type="radio" id="input_332" name="Select_Flooring" value="Ceramic/Porcelain Tile Floor" data-value="9750,19500,29250,29250,29250,29250"> <label for="input_332">Ceramic/Porcelain Tile Floor</label></p>
+                 <p><input type="radio" id="input_333" name="Select_Flooring" value="Vinyl Floor" data-value="6500,13000,19500,19500,19500,19500"> <label for="input_333">Vinyl Floor</label></p>
+                 <p><input type="radio" id="input_334" name="Select_Flooring" value="Hardwood Floor" data-value="9750,19500,26000,26000,26000,26000"> <label for="input_334">Hardwood Floor</label></p>
+                 <p><input type="radio" id="input_335" name="Select_Flooring" value="Vinyl/Tile Mix" data-value="8125,16900,22750,22750,22750,22750"> <label for="input_335">Vinyl/Tile Mix</label></p>
+                 <p><input type="radio" id="input_433" name="Select_Flooring" value="Hardwood/Tile Mix" data-value="9750,19500,29250,29250,29250,29250"> <label for="input_433">Hardwood/Tile Mix</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Add Plumbing to the Addition? <span>*</span></h4>
+                 <p><input type="radio" id="input_336" name="Add_Plumbing_to_the_Addition?" value="Yes" data-value="20000,20000,20000,20000,20000,20000"> <label for="input_336">Yes</label></p>
+                 <p><input type="radio" id="input_337" name="Add_Plumbing_to_the_Addition?" value="No" data-value="0,0,0,0,0,0"> <label for="input_337">No</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Electrical <span>*</span></h4>
+                 <p><input type="radio" id="input_338" name="Electrical" value="Include a kitchen in this space" data-value="26000,26000,26000,26000,26000,26000"> <label for="input_338">Include a kitchen in this space</label></p>
+                 <p><input type="radio" id="input_339" name="Electrical" value="Including a bathroom in this space" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_339">Including a bathroom in this space</label></p>
+                 <p><input type="radio" id="input_340" name="Electrical" value="Kitchen And Bathroom in this space" data-value="39000,39000,39000,39000,39000,39000"> <label for="input_340">Kitchen And Bathroom in this space</label></p>
+                 <p><input type="radio" id="input_341" name="Electrical" value="Only regular rooms" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_341">Only regular rooms</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>Siding <span>*</span></h4>
+                 <p><input type="checkbox" id="input_342" name="Siding[]" value="Vinyl" data-value="6500,13000,19500,26000,26000,26000"> <label for="input_342"> Vinyl</label></p>
+                 <p><input type="checkbox" id="input_343" name="Siding[]" value="Stucco" data-value="13000,26000,39000,52000,52000,52000"> <label for="input_343"> Stucco</label></p>
+                 <p><input type="checkbox" id="input_344" name="Siding[]" value="Stone" data-value="19500,39000,58500,78000,78000,78000"> <label for="input_344"> Stone</label></p>
+                 <p><input type="checkbox" id="input_345" name="Siding[]" value="Cement Board" data-value="9750,19500,29250,39000,39000,39000"> <label for="input_345"> Cement Board</label></p>
+                 <p><input type="checkbox" id="input_441" name="Siding[]" value="Cedar" data-value="9750,19500,29250,39000,39000,39000"> <label for="input_441"> Cedar</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Windows? <span>*</span></h4>
+                 <p><input type="radio" id="input_346" name="Windows?" value="1 to 3" data-value="7800,7800,7800,7800,7800,7800"> <label for="input_346">1 to 3</label></p>
+                 <p><input type="radio" id="input_347" name="Windows?" value="4 to 6" data-value="15600,15600,15600,15600,15600,15600"> <label for="input_347">4 to 6</label></p>
+                 <p><input type="radio" id="input_348" name="Windows?" value="7+" data-value="19500,19500,19500,19500,19500,19500"> <label for="input_348">7+</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>HVAC <span>*</span></h4>
+                 <p><input type="checkbox" id="input_349" name="HVAC[]" value="Add ducts for Heat/AC" data-value="6500,6500,6500,6500,6500,6500"> <label for="input_349"> Add ducts for Heat/AC</label></p>
+                 <p><input type="checkbox" id="input_350" name="HVAC[]" value="Add Heater" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_350"> Add Heater</label></p>
+                 <p><input type="checkbox" id="input_351" name="HVAC[]" value="Add AC" data-value="6500,9750,9750,9750,9750,9750"> <label for="input_351"> Add AC</label></p>
+                 <p><input type="checkbox" id="input_442" name="HVAC[]" value="Add baseboard heating" data-value="3250,3250,3250,3250,3250,3250"> <label for="input_442"> Add baseboard heating</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>Features <span>*</span></h4>
+                 <p><input type="checkbox" id="input_353" name="Features[]" value="High Ceilings" data-value="6500,6500,6500,6500,6500,6500"> <label for="input_353"> High Ceilings</label></p>
+                 <p><input type="checkbox" id="input_354" name="Features[]" value="Upgrade Electrical Panel" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_354"> Upgrade Electrical Panel</label></p>
+                 <p><input type="checkbox" id="input_355" name="Features[]" value="Add Modern Doors" data-value="6500,6500,6500,6500,6500,6500"> <label for="input_355"> Add Modern Doors</label></p>
+                 <p><input type="checkbox" id="input_356" name="Features[]" value="In Floor Heating" data-value="6500,6500,6500,6500,6500,6500"> <label for="input_356"> In Floor Heating</label></p>
+                 <p><input type="checkbox" id="input_357" name="Features[]" value="Coffered Ceilings" data-value="12000,12000,12000,12000,12000,12000"> <label for="input_357"> Coffered Ceilings</label></p>
+                 <p><input type="checkbox" id="input_358" name="Features[]" value="Add Washer/Dryer" data-value="13000,13000,13000,13000,13000,13000"> <label for="input_358"> Add Washer/Dryer</label></p>
+                 <p><input type="checkbox" id="input_448" name="Features[]" value="None of the above" data-value="0,0,0,0,0,0"> <label for="input_448"> None of the above</label></p>
+             </div>
+             <div class="step-tab type_Checkbox">
+                 <h4>Drywall & Paint <span>*</span></h4>
+                 <p><input type="checkbox" id="input_360" name="Drywall_&_Paint[]" value="Fire rated Drywall" data-value="3250,6500,6500,6500,6500,6500"> <label for="input_360"> Fire rated Drywall</label></p>
+                 <p><input type="checkbox" id="input_361" name="Drywall_&_Paint[]" value="Regular Drywall" data-value="1950,3900,3900,3900,3900,3900"> <label for="input_361"> Regular Drywall</label></p>
+                 <p><input type="checkbox" id="input_362" name="Drywall_&_Paint[]" value="3 coats of paint" data-value="1950,3900,3900,3900,3900,3900"> <label for="input_362"> 3 coats of paint</label></p>
+             </div>
+             <div class="step-tab type_Radio">
+                 <h4>Would you like a concept design from our Designers at no cost to you? <span>*</span></h4>
+                 <p><input type="radio" id="input_363" name="Would_you_like_a_concept_design_from_our_Designers_at_no_cost_to_you?" value="Yes - I would love for a professional to help me develop my project vision to save me time and money." data-value="0"> <label for="input_363">Yes - I would love for a professional to help me develop my project vision to save me time and money.</label></p>
+                 <p><input type="radio" id="input_364" name="Would_you_like_a_concept_design_from_our_Designers_at_no_cost_to_you?" value="No - I prefer to pay" data-value="0"> <label for="input_364">No - I prefer to pay</label></p>
+                 <p><input type="radio" id="input_365" name="Would_you_like_a_concept_design_from_our_Designers_at_no_cost_to_you?" value="No - I am already working with an architect/interior designer but thank you!" data-value="0"> <label for="input_365">No - I am already working with an architect/interior designer but thank you!</label></p>
+             </div>
+             <div class="step-tab final_step">
+                 <h4>Get Your Free Home Addition Estimate and Concept Design<span>*</span></h4>
+                 <p><label>Name <span>*</span></label>
+                   <input type="text" id="full_name" name="full_name" required>
+                 </p>
+                 <p><label>Email <span>*</span></label>
+                   <input type="email" id="email_address" name="email_address" required>
+                 </p>
+                 <p><label>Phone <span>*</span></label>
+                   <input type="tel" id="phone_number" name="phone_number" required>
+                 </p>
+             </div>
+             <div style="overflow:auto;">
+                 <div>
+                   <button type="button" id="prevBtn" onclick="">Previous</button>
+                   <button type="button" id="nextBtn" onclick="">Next</button>
+                 </div>
+             </div>
+             <div style="text-align:center;margin-top:40px;" class="step-circles">
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+                 <span class="step"></span>
+             </div>
+             <input type="hidden" id="Low_Range" value="" name="Low_Range"> 
+             <input type="hidden" id="High_Range" value="" name="High_Range">
+           </div>
+         </form>
+      </div>
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script>
+      $(document).ready(function(){
+      
+      $('.strt-now-btn').click(function(){
+      $('.dream_kitchen_step').hide();
+      $('#regForm').show();
+      
+      jQuery('input[type="checkbox"], input[type="radio"]').change(function(){
+              calculation();	
+               })
+      })
+        var current = 1;
+          
+          widget      = $(".step-tab");
+          btnnext     = $("#nextBtn");
+          btnback     = $("#prevBtn"); 
+          btnsubmit   = $(".submit");
+
+      
+          widget.not(':eq(0)').hide();
+          if($(widget).eq('0').hasClass('type_Radio')){
+          hideButtons(0,'radio');
+          }else{
+          
+          hideButtons(current,'checkbox');
+          }
+          
+          setProgress(current);
+      
+          btnnext.click(function(){
+          
+              if(current == widget.length){
+              var email_address = $('#email_address').val();
+          
+              
+              if(!validateForm() || !validateEmail(email_address)){
+              $('#error_msg').remove();
+              $(widget).eq(current-1).append('<p id="error_msg">Please enter correct information!</p>');
+              return false;
+              }else{
+              save_entries();
+              return false;
+                  }
+              
+              }
+          
+          var check_val = $(widget).eq(current-1).find('input:checked').val();
+          if(check_val == 'undefined' || check_val == undefined){
+              $('#error_msg').remove();
+          $(widget).eq(current-1).append('<p id="error_msg">Please select atleast one option!</p>');
+          
+              return false;
+              }else{
+                  $('#error_msg').remove();
+              }
+              if(current < widget.length) { 
+                  
+          var type_class = $(widget).eq(current).attr('class');
+          var nextbtn_display = true;
+          if($(widget).eq(current).hasClass('type_Radio')){
+              }	
+                  widget.show(); 			
+                  widget.not(':eq('+(current++)+')').hide();
+                    setProgress(current);
+                          
+          
+              } 	
+      
+              if(nextbtn_display == true){
+                hideButtons(current,'');
+              }else{
+              var limit = parseInt(widget.length); 
+                hideButtons(limit+1,''); 
+                  }
+               
+         });
+             
+        btnback.click(function(){ 
+          
+              document.getElementById("nextBtn").innerHTML = "Next";	
+            if(current > 1 || current == ''){
+                  current = current - 2;
+                  widget.show(); 			
+                  widget.not(':eq('+(current++)+')').hide();
+                    setProgress(current);
+              }
+              hideButtons(current,'');
+          });		
+      });
+      
+      setProgress = function(currstep){
+          var percent = parseFloat(100 / widget.length) * currstep;
+          percent = percent.toFixed();
+          $(".progress-bar").css("width",percent+"%").html(percent+"%");		
+      }
+      
+      
+      hideButtons = function(current,type){
+          
+          var limit = parseInt(widget.length); 
+      calculation();
+          $(".action").hide();
+      
+       if(current == limit){
+          
+           document.getElementById("nextBtn").innerHTML = "Submit";
+      }
+          if(current <= limit) {btnnext.show(); }else {
+              } 	
+        if(current > 1) {btnback.show();}else {
+            btnback.hide();
+            };
+          if(type == 'checkbox'){
+              btnnext.show();
+              }
+      }
+      function calculation(){
+      
+          
+      
+      var input_4 = jQuery('input[name="Do_you_own_your_own_home?"]:checked').val();
+      
+      var item = 2;
+      var total = 0;
+      var total_val = 0;
+      
+      
+          var checked_val = parseInt($('input[name="Do_you_own_your_own_home?"]:checked').attr('data-value'));
+          jQuery('input[type="checkbox"]:checked , input[type="radio"]:checked').each(function(){
+              var xyz= $(this).attr('name');
+          
+              if(xyz != "Do_you_own_your_own_home?"){
+                  var data_value = (jQuery(this).attr('data-value'));
+                  
+                  var abc1 = data_value.split(",");	
+                  if(abc1.length > 1){
+                      var split_val = abc1[checked_val];
+                          data_value = split_val;
+                  }
+              
+              }
+              
+          
+              
+              data_value = parseFloat(data_value);
+              if( data_value != undefined && data_value != 'undefined' && data_value != 'NaN' && !isNaN(data_value)){
+                  total = total + data_value;
+              }
+          });
+              
+      
+      
+      jQuery('#updated_price_form').text('$'+numberWithCommas(total.toFixed(0)));
+      
+      var total_val_calc = total * 1.5;
+       jQuery('#Low_Range').val('$'+numberWithCommas(total.toFixed(0)));
+       jQuery('#High_Range').val('$'+numberWithCommas(total_val_calc.toFixed(0)));
+       
+      
+          }
+          
+        
+          function numberWithCommas(number) {
+                  var parts = number.toString().split(".");
+                  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return parts.join(".");
+              }
+      
+           function removeCommas(val){
+                  return val.replace(/,/g , '');
+              }
+          
+              function validateForm() {
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("final_step");
+        y = x[0].getElementsByTagName("input");
+        for (i = 0; i < y.length; i++) {
+          if (y[i].value == "") {
+            y[i].className += " invalid";
+            valid = false;
+          }
+        }
+        if (valid) {
+          document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid;
+      }
+      function validateEmail(email) {
+        var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      
+        return $.trim(email).match(pattern) ? true : false;
+      }
+      
+      function save_entries(){
+          var ajax_url = $('#admin_url').val();
+          var Low_Range = $('#Low_Range').val();
+          var High_Range = $('#High_Range').val();
+          var form_data = $('#regForm').serialize();
+          var slider_admin_email = jQuery('input[name="slider_admin_email"]').val();
+          var item_order = new Array();
+          $('.question_tbl tbody tr').each(function() {
+              item_order.push($(this).attr("id"));
+          });
+      
+      
+      
+      
+          var data = {
+              'action': 'save_data',
+              form_data: form_data,
+              
+          };
+
+          
+          var redirectTo = 'https://gorivercityconstruction.com/index.php/thank-you/';
+      
+          
+         
+                  $.ajax({
+                    url:"https://hooks.zapier.com/hooks/catch/16242006/39akbny/", // url where to submit the request
+                      type : "POST", // type of action POST || GET
+                      dataType : 'HTML', // data type
+                      data : $("#regForm").serialize(), // post data || get data
+                      success : function(result) {
+                         //redirect to Thank you page
+                          window.location.href = redirectTo;
+                      },
+                      error: function(xhr, resp, text) {
+                          console.log(xhr, resp, text);
+                      }
+                  })
+
+      }       
+   </script>	
+   <script>
+      var currentTab = 0;
+      showTab(currentTab);
+      
+      function showTab(n) {
+           $(".updating_steps").text(n+1);
+        var x = document.getElementsByClassName("step-tab");
+        x[n].style.display = "block";
+       $(".updating_steps").text(n+1);
+       
+      }
+      
+      function nextPrev(n) {
+        var x = document.getElementsByClassName("step-tab");
+        if (n == 1 && !validateForm()) return false;
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab >= x.length) {
+          document.getElementById("regForm").submit();
+          return false;
+        }
+      }      
+      
+      function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+          x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+      }
+
+      
+      
+   </script>
+   <style>
+      .wp-container-1 > :where(:not(.alignleft):not(.alignright)){ width: 100% !important; max-width: 100% !important;}
+      .step-tab label {
+      display: initial !important;
+      }
+   </style>
+</body>
